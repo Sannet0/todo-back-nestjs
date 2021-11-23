@@ -2,20 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Repository } from 'sequelize-typescript';
 import { TaskModel } from '../models/task.model';
-import { CreateTaskDto } from './dto/creating-task.dto';
-import { SetTaskStatusDto } from './dto/status-task.dto';
-import { RemoveTaskDto } from './dto/removing-task.dto';
+import { ICreateTask } from '../interfaces/create-task-interface';
+import { IChangeTask } from '../interfaces/change-task-interface';
+import { ISetStatusTask } from '../interfaces/set-status-task-interface';
 
 @Injectable()
 export class TaskService {
   constructor(@InjectModel(TaskModel) private taskRepository: Repository<TaskModel>) {}
 
-  async createTask(dto: CreateTaskDto) {
-    return await this.taskRepository.create(dto);
+  async createTask(task: ICreateTask) {
+    return await this.taskRepository.create(task);
   }
 
-  async deleteTask(dto: RemoveTaskDto) {
-    const {id} = dto
+  async deleteTask(task: IChangeTask) {
+    const {id} = task;
     return await this.taskRepository.destroy({
       where: {
         id
@@ -23,8 +23,8 @@ export class TaskService {
     });
   }
 
-  async setTaskStatus(dto: SetTaskStatusDto) {
-    const {isComplete, id} = dto;
+  async setTaskStatus(task: ISetStatusTask) {
+    const {isComplete, id} = task;
     return await this.taskRepository.update({ isComplete }, {
       where: {
         id

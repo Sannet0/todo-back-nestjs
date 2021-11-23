@@ -1,4 +1,3 @@
-export class SetTaskStatusDto {
-  readonly id: number;
+export class StatusTaskDto {
   readonly isComplete: boolean;
 }
