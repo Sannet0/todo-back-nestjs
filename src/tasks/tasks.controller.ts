@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Controller, Delete, Get, Patch } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { CreateTaskDto } from "./dto/creating-task.dto";
 
 @Controller('tasks')
 export class TasksController {
@@ -8,12 +7,17 @@ export class TasksController {
 
   @Get()
   getAll() {
-    return this.tasksService.getAllProducts();
+    return this.tasksService.getAllTasks();
   }
 
-  @Post()
-  add(@Body() taskDto: CreateTaskDto) {
-    return this.tasksService.createProduct(taskDto);
+  @Delete("complete")
+  deleteCompleted() {
+    return this.tasksService.deleteCompletedTask();
+  }
+
+  @Patch("all")
+  setAllComplete(){
+    return this.tasksService.setAllComplete();
   }
 
 }

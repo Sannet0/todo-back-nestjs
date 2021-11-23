@@ -5,7 +5,7 @@ interface TaskCreationAttrs {
 }
 
 @Table({ tableName: 'task' })
-export class TasksModel extends Model<TasksModel, TaskCreationAttrs> {
+export class TaskModel extends Model<TaskModel, TaskCreationAttrs> {
 
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
   id: string;

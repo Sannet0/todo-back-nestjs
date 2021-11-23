@@ -1,17 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTaskDto } from "./dto/creating-task.dto";
 import { InjectModel } from "@nestjs/sequelize";
-import { TasksModel } from "./tasks.model";
+import { TaskModel } from "../models/task.model";
+import { Repository } from "sequelize-typescript";
 
 @Injectable()
 export class TasksService {
-  constructor(@InjectModel(TasksModel) private taskRepository: typeof TasksModel) {}
+  constructor(@InjectModel(TaskModel) private taskRepository: Repository<TaskModel>) {}
 
-  async getAllProducts() {
+  async getAllTasks() {
     return await this.taskRepository.findAll();
   }
 
-  async createProduct(dto: CreateTaskDto) {
-    return await this.taskRepository.create(dto);
+  async deleteCompletedTask() {
+    return await this.taskRepository.destroy({
+      where: {
+        isComplete: true
+      }
+    });
+  }
+
+  async setAllComplete() {
+    return await  this.taskRepository.update({ isComplete: true }, {
+      where: {
+        isComplete: false
+      }
+    });
   }
 }
