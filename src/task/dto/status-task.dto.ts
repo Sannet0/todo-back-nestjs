@@ -1,3 +1,3 @@
 export class StatusTaskDto {
-  readonly isCompletedd: boolean;
+  readonly isCompleted: boolean;
 }

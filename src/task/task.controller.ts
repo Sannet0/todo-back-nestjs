@@ -20,6 +20,6 @@ export class TaskController {
 
   @Patch(':id')
   setStatus(@Param() paramDto: ChangeTaskDto, @Body() bodyDto: StatusTaskDto) {
-    return this.taskService.setTaskStatus({ id: paramDto.id, isCompleted: bodyDto.isCompletedd });
+    return this.taskService.setTaskStatus({ id: paramDto.id, isCompleted: bodyDto.isCompleted });
   }
 }
