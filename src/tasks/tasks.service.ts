@@ -8,7 +8,11 @@ export class TasksService {
   constructor(@InjectModel(TaskModel) private taskRepository: Repository<TaskModel>) {}
 
   async getAllTasks() {
-    return await this.taskRepository.findAll();
+    return await this.taskRepository.findAll({
+      order: [
+        ['id', 'ASC']
+      ]
+    });
   }
 
   async deleteCompletedTask() {
