@@ -24,8 +24,8 @@ export class TaskService {
   }
 
   async setTaskStatus(task: ISetStatusTask) {
-    const {isComplete, id} = task;
-    return await this.taskRepository.update({ isComplete }, {
+    const {isCompleted, id} = task;
+    return await this.taskRepository.update({ isCompleted }, {
       where: {
         id
       }

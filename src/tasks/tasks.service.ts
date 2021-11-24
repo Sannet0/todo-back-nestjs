@@ -18,15 +18,15 @@ export class TasksService {
   async deleteCompletedTask() {
     return await this.taskRepository.destroy({
       where: {
-        isComplete: true
+        isCompleted: true
       }
     });
   }
 
   async setAllComplete() {
-    return await  this.taskRepository.update({ isComplete: true }, {
+    return await  this.taskRepository.update({ isCompleted: true }, {
       where: {
-        isComplete: false
+        isCompleted: false
       }
     });
   }
