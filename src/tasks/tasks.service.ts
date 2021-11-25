@@ -8,21 +8,25 @@ export class TasksService {
   constructor(@InjectModel(TaskModel) private taskRepository: Repository<TaskModel>) {}
 
   async getAllTasks() {
-    return await this.taskRepository.findAll();
+    return await this.taskRepository.findAll({
+      order: [
+        ['id', 'ASC']
+      ]
+    });
   }
 
   async deleteCompletedTask() {
     return await this.taskRepository.destroy({
       where: {
-        isComplete: true
+        isCompleted: true
       }
     });
   }
 
   async setAllComplete() {
-    return await  this.taskRepository.update({ isComplete: true }, {
+    return await  this.taskRepository.update({ isCompleted: true }, {
       where: {
-        isComplete: false
+        isCompleted: false
       }
     });
   }

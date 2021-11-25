@@ -14,6 +14,6 @@ export class TaskModel extends Model<TaskModel, TaskCreationAttrs> {
   text: string;
 
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
-  isComplete: boolean;
+  isCompleted: boolean;
 
 }
