@@ -3,6 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { TasksModule } from './tasks/tasks.module';
 import { TaskModel } from './models/task.model';
 import { TaskModule } from './task/task.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { TaskModule } from './task/task.module';
       autoLoadModels: true
     }),
     TasksModule,
-    TaskModule
+    TaskModule,
+    UserModule
   ]
 })
 export class AppModule {}

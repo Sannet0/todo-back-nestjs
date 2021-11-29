@@ -1,11 +1,20 @@
 import { Module } from '@nestjs/common';
+import { SequelizeModule } from "@nestjs/sequelize";
+import { JwtModule } from '@nestjs/jwt';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
-import { SequelizeModule } from "@nestjs/sequelize";
 import { TaskModel } from "../models/task.model";
 
 @Module({
-  imports: [SequelizeModule.forFeature([TaskModel])],
+  imports: [
+    SequelizeModule.forFeature([TaskModel]),
+    JwtModule.register({
+      secret: 'SECRET',
+      signOptions: {
+        expiresIn: '24h'
+      }
+    })
+  ],
   controllers: [TasksController],
   providers: [TasksService]
 })
